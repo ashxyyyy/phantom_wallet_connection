@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lancia Memecoin</title>
+    <title>Launch</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/solana-web3.js/1.75.0/solana-web3.min.js"></script>
     <style>
         body {
             background: #0a0a0a;
             color: #fff;
-            text-align: center;
             font-family: Arial, sans-serif;
+            text-align: center;
         }
         .container {
             width: 100%;
@@ -20,15 +21,14 @@
             border-radius: 10px;
             box-shadow: 0px 0px 15px #00ffcc;
         }
-        input, button {
+        button {
             width: 90%;
+            margin: 10px 0;
             padding: 10px;
-            margin-top: 10px;
             border: none;
             border-radius: 5px;
-        }
-        button {
             background: #00ffcc;
+            color: #000;
             font-weight: bold;
             cursor: pointer;
         }
@@ -39,17 +39,25 @@
 </head>
 <body>
     <div class="container">
-        <h2>Crea la tua Memecoin</h2>
-        <input type="text" placeholder="Nome Memecoin">
-        <input type="file" accept="image/*">
-        <input type="text" placeholder="Collega Twitter">
-        <input type="text" placeholder="Collega Telegram">
-        <button onclick="connectPhantom()">Connetti Phantom Wallet</button>
+        <h2>Connetti il tuo Wallet</h2>
+        <button onclick="connectWallet()">Connetti Wallet</button>
+        <p id="walletAddress"></p>
     </div>
 
     <script>
-        function connectPhantom() {
-            window.location.href = 'https://phantom.app/';
+        async function connectWallet() {
+            if (window.solana && window.solana.isPhantom) {
+                try {
+                    const response = await window.solana.connect();
+                    document.getElementById("walletAddress").innerText = "Wallet Connesso: " + response.publicKey.toString();
+                } catch (error) {
+                    console.error("Errore di connessione:", error);
+                    alert("Errore durante la connessione al wallet.");
+                }
+            } else {
+                alert("Phantom Wallet non trovato! Installa Phantom per continuare.");
+                window.open("https://phantom.app/", "_blank");
+            }
         }
     </script>
 </body>
