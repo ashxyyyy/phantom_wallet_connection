@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lancia Memecoin</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background: #111;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px #00ffcc;
+        }
+        input, button {
+            width: 90%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background: #00ffcc;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #008f7a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Crea la tua Memecoin</h2>
+        <input type="text" placeholder="Nome Memecoin">
+        <input type="file" accept="image/*">
+        <input type="text" placeholder="Collega Twitter">
+        <input type="text" placeholder="Collega Telegram">
+        <button onclick="connectPhantom()">Connetti Phantom Wallet</button>
+    </div>
+
+    <script>
+        function connectPhantom() {
+            window.location.href = 'https://phantom.app/';
+        }
+    </script>
+</body>
+</html>
