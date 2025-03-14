@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,16 +21,17 @@
             border-radius: 10px;
             box-shadow: 0px 0px 15px #00ffcc;
         }
-        h2 {
-            margin-bottom: 20px;
+        input, button {
+            width: 90%;
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
         }
         button {
             background: #00ffcc;
             color: #000;
             font-weight: bold;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
         }
         button:hover {
@@ -39,14 +41,14 @@
 </head>
 <body>
     <div class="container">
-        <h2>Benvenuto nel Crypto Launchpad</h2>
-        <p>Vieni guidato nel processo di creazione della tua coin!</p>
-        <button onclick="startProcess()">Inizia il processo</button>
+        <h2>Registrazione</h2>
+        <input type="text" placeholder="Username" id="username">
+        <input type="password" placeholder="Password" id="password">
+        <button onclick="goToSolana()">Accedi</button>
     </div>
 
     <script>
-        function startProcess() {
-            // Prima pagina (index.html) reindirizza alla seconda pagina (solana.html)
+        function goToSolana() {
             window.location.href = 'solana.html';
         }
     </script>
