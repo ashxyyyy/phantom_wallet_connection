@@ -41,12 +41,9 @@
 </head>
 <body>
     <div class="container">
-        <h2>Registrazione</h2>
-        <input type="text" placeholder="Username" id="username">
-        <input type="password" placeholder="Password" id="password">
+        <h2>Collega il tuo Wallet</h2>
         <button onclick="connectWallet()">Connetti Wallet</button>
         <p id="walletAddress"></p>
-        <button onclick="goToSolana()">Vai a Solana</button>
     </div>
 
     <script>
@@ -63,10 +60,6 @@
                 alert("Phantom Wallet non trovato! Installa Phantom per continuare.");
                 window.open("https://phantom.app/", "_blank");
             }
-        }
-
-        function goToSolana() {
-            window.location.href = 'solana.html';
         }
     </script>
 </body>
