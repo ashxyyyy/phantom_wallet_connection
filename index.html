@@ -1,42 +1,59 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collega il Tuo Wallet Phantom</title>
+    <title>Crypto Launchpad</title>
     <style>
-        /* Reset di base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #2d2f36, #111); /* Gradiente scuro futuristico */
+            background: #0a0a0a;
             color: #fff;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .container {
+            font-family: Arial, sans-serif;
             text-align: center;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.5);
-            width: 100%;
-            max-width: 500px;
-            position: relative;
-            z-index: 1;
         }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background: #111;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px #00ffcc;
+        }
+        input, button {
+            width: 90%;
+            margin: 10px 0;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        button {
+            background: #00ffcc;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #008f7a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Registrazione</h2>
+        <input type="text" placeholder="Username" id="username">
+        <input type="password" placeholder="Password" id="password">
+        <button onclick="goToLaunch()">Accedi</button>
+    </div>
 
-        h1 {
-            font-size: 32px;
+    <script>
+        function goToLaunch() {
+            window.location.href = 'launch.html';
+        }
+    </script>
+</body>
+</html>
+
             margin-bottom: 20px;
             color: #00c9ff; /* Colore azzurro cyberpunk */
             text-shadow: 0 0 10px rgba(0, 201, 255, 0.8);
