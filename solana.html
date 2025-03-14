@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solana</title>
+    <title>Solana Wallet Connection</title>
     <style>
         body {
             background: #0a0a0a;
@@ -21,12 +21,14 @@
             box-shadow: 0px 0px 15px #00ffcc;
         }
         button {
-            background: #00ffcc;
-            color: #000;
-            font-weight: bold;
+            width: 90%;
+            margin: 10px 0;
             padding: 10px;
             border: none;
             border-radius: 5px;
+            background: #00ffcc;
+            color: #000;
+            font-weight: bold;
             cursor: pointer;
         }
         button:hover {
@@ -36,15 +38,17 @@
 </head>
 <body>
     <div class="container">
-        <h2>Benvenuto su Solana</h2>
-        <p>Informazioni su Solana... (aggiungi dettagli su Solana qui)</p>
-        <button onclick="goToCreateCoin()">Vai alla creazione della Coin</button>
+        <h2>Connessione Wallet Solana</h2>
+        <button onclick="connectWallet()">Collega Wallet</button>
     </div>
 
     <script>
-        function goToCreateCoin() {
-            window.location.href = 'create-coin.html';  // Link alla nuova pagina di creazione della coin
+        function connectWallet() {
+            // Logica per connettere il wallet Solana
+            alert('Wallet Solana connesso!');
+            window.location.href = 'launch.html'; // Reindirizza a launch.html
         }
     </script>
 </body>
 </html>
+
