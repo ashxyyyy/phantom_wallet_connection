@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Launchpad</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/solana-web3.js/1.75.0/solana-web3.min.js"></script>
     <style>
         body {
             background: #0a0a0a;
@@ -40,16 +41,27 @@
 </head>
 <body>
     <div class="container">
-        <h2>Registrazione</h2>
-        <input type="text" placeholder="Username" id="username">
-        <input type="password" placeholder="Password" id="password">
-        <button onclick="goToSolana()">Accedi</button>
+        <h2>Collega il tuo Wallet</h2>
+        <button onclick="connectWallet()">Connetti Wallet</button>
+        <p id="walletAddress"></p>
     </div>
 
     <script>
-        function goToSolana() {
-            window.location.href = 'solana.html';
+        async function connectWallet() {
+            if (window.solana && window.solana.isPhantom) {
+                try {
+                    const response = await window.solana.connect();
+                    document.getElementById("walletAddress").innerText = "Wallet Connesso: " + response.publicKey.toString();
+                } catch (error) {
+                    console.error("Errore di connessione:", error);
+                    alert("Errore durante la connessione al wallet.");
+                }
+            } else {
+                alert("Phantom Wallet non trovato! Installa Phantom per continuare.");
+                window.open("https://phantom.app/", "_blank");
+            }
         }
     </script>
 </body>
 </html>
+
