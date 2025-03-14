@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phantom Wallet Connection</title>
+</head>
+<body>
+    <h1>Benvenuto sulla pagina di connessione del wallet Phantom!</h1>
+    <button id="connect-wallet">Connetti il tuo wallet Phantom</button>
+
+    <script src="https://unpkg.com/@solana/web3.js"></script>
+    <script src="https://unpkg.com/@phantom-sdk/js"></script>
+    <script>
+        document.getElementById('connect-wallet').onclick = async function() {
+            const { solana } = window;
+            if (solana && solana.isPhantom) {
+                try {
+                    const response = await solana.connect();
+                    alert('Wallet connesso: ' + response.publicKey.toString());
+                } catch (err) {
+                    alert('Errore durante la connessione: ' + err.message);
+                }
+            } else {
+                alert('Wallet Phantom non trovato. Installa Phantom Wallet.');
+            }
+        };
+    </script>
+</body>
+</html>
