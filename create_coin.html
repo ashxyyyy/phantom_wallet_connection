@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Coin</title>
+    <title>Solana</title>
     <style>
         body {
             background: #0a0a0a;
@@ -13,80 +13,37 @@
         }
         .container {
             width: 100%;
-            max-width: 600px;
-            margin: 50px auto;
+            max-width: 400px;
+            margin: 100px auto;
             padding: 20px;
             background: #111;
             border-radius: 10px;
             box-shadow: 0px 0px 15px #00ffcc;
         }
-        h2 {
-            margin-bottom: 20px;
-        }
-        input, textarea, button {
-            width: 90%;
-            margin: 10px 0;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-        }
-        input, textarea {
-            background: #222;
-            color: #fff;
-        }
         button {
             background: #00ffcc;
             color: #000;
             font-weight: bold;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
         }
         button:hover {
             background: #008f7a;
         }
-        textarea {
-            resize: vertical;
-            height: 120px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Crea la tua Coin</h2>
-        <form id="createCoinForm">
-            <input type="text" id="name" placeholder="Nome della Coin" required>
-            <input type="text" id="ticker" placeholder="Ticker della Coin" required>
-            <textarea id="description" placeholder="Descrizione della Coin" required></textarea>
-            <input type="url" id="imageLink" placeholder="Link Immagine" required>
-            <input type="url" id="twitterLink" placeholder="Link Twitter" required>
-            <input type="url" id="telegramLink" placeholder="Link Telegram" required>
-            <input type="url" id="websiteLink" placeholder="Link Website" required>
-            <button type="button" onclick="createCoin()">Create Coin</button>
-        </form>
+        <h2>Benvenuto su Solana</h2>
+        <p>Informazioni su Solana... (aggiungi dettagli su Solana qui)</p>
+        <button onclick="goToCreateCoin()">Vai alla creazione della Coin</button>
     </div>
 
     <script>
-        function createCoin() {
-            // Collect form data
-            const name = document.getElementById('name').value;
-            const ticker = document.getElementById('ticker').value;
-            const description = document.getElementById('description').value;
-            const imageLink = document.getElementById('imageLink').value;
-            const twitterLink = document.getElementById('twitterLink').value;
-            const telegramLink = document.getElementById('telegramLink').value;
-            const websiteLink = document.getElementById('websiteLink').value;
-
-            // Log the data to the console (optional, for debugging)
-            console.log('Coin Details:');
-            console.log('Name:', name);
-            console.log('Ticker:', ticker);
-            console.log('Description:', description);
-            console.log('Image Link:', imageLink);
-            console.log('Twitter:', twitterLink);
-            console.log('Telegram:', telegramLink);
-            console.log('Website:', websiteLink);
-
-            // Redirect to the launch page after coin creation
-            window.location.href = 'launch.html';  // Change to actual launch page URL
+        function goToCreateCoin() {
+            window.location.href = 'create-coin.html';  // Link alla nuova pagina di creazione della coin
         }
     </script>
 </body>
