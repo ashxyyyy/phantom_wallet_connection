@@ -1,30 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phantom Wallet Connection</title>
+    <title>Collega il Tuo Wallet Phantom</title>
+    <style>
+        /* Reset di base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #2d2f36, #111); /* Gradiente scuro futuristico */
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: #00c9ff; /* Colore azzurro cyberpunk */
+            text-shadow: 0 0 10px rgba(0, 201, 255, 0.8);
+        }
+
+        p {
+            color: #ccc;
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            background-color: #00c9ff;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .btn:hover {
+            background-color: #009acb;
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            background-color: #00788b;
+            transform: scale(1);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            font-size: 14px;
+            color: #999;
+        }
+
+        footer a {
+            color: #00c9ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #fff;
+        }
+
+        .background-graphic {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://cdn.pixabay.com/photo/2018/11/09/08/51/technology-3807807_960_720.jpg') no-repeat center center;
+            background-size: cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+    </style>
 </head>
 <body>
-    <h1>Benvenuto sulla pagina di connessione del wallet Phantom!</h1>
-    <button id="connect-wallet">Connetti il tuo wallet Phantom</button>
 
-    <script src="https://unpkg.com/@solana/web3.js"></script>
-    <script src="https://unpkg.com/@phantom-sdk/js"></script>
-    <script>
-        document.getElementById('connect-wallet').onclick = async function() {
-            const { solana } = window;
-            if (solana && solana.isPhantom) {
-                try {
-                    const response = await solana.connect();
-                    alert('Wallet connesso: ' + response.publicKey.toString());
-                } catch (err) {
-                    alert('Errore durante la connessione: ' + err.message);
-                }
-            } else {
-                alert('Wallet Phantom non trovato. Installa Phantom Wallet.');
-            }
-        };
-    </script>
+    <div class="container">
+        <h1>Connetti il Tuo Wallet Phantom</h1>
+        <p>Accedi al mondo delle criptovalute con Phantom Wallet e inizia a esplorare il futuro della blockchain.</p>
+        <a href="https://www.phantom.app/" target="_blank">
+            <button class="btn">Collega Wallet</button>
+        </a>
+        <footer>
+            <p>Powered by <a href="https://www.phantom.app/" target="_blank">Phantom Wallet</a></p>
+        </footer>
+    </div>
+
+    <div class="background-graphic"></div>
+
 </body>
 </html>
