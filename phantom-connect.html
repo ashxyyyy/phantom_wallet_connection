@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
             height: 100vh;
             margin: 0;
         }
+
         .container {
             background: #111;
             padding: 30px;
@@ -23,9 +25,11 @@
             text-align: center;
             width: 350px;
         }
+
         h2 {
             margin-bottom: 20px;
         }
+
         button {
             width: 100%;
             padding: 12px;
@@ -37,18 +41,22 @@
             cursor: pointer;
             transition: background 0.3s;
         }
+
         button:hover {
             background: #008f7a;
         }
+
         .connected {
             color: #00ffcc;
             margin-bottom: 15px;
             display: none;
         }
+
         #amount-section {
             display: none;
             margin-top: 10px;
         }
+
         input[type="number"] {
             width: 90%;
             padding: 10px;
@@ -57,12 +65,14 @@
             border: none;
             border-radius: 5px;
         }
+
         #next-btn {
             display: none;
             background: #ff00cc;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h2>Setup Memecoin</h2>
@@ -71,7 +81,7 @@
         <div class="connected" id="wallet-status">Wallet collegato ✅</div>
 
         <button onclick="showAmount()">Inserisci Importo</button>
-        
+
         <div id="amount-section">
             <input type="number" placeholder="Importo in SOL" min="0.01" step="0.01" id="amount">
         </div>
@@ -80,9 +90,19 @@
     </div>
 
     <script>
-        function connectPhantom() {
-            document.getElementById('wallet-status').style.display = 'block';
-            alert('Wallet Phantom collegato (simulazione)');
+        async function connectPhantom() {
+            if (window.solana && window.solana.isPhantom) {
+                try {
+                    const resp = await window.solana.connect();
+                    document.getElementById('wallet-status').style.display = 'block';
+                    document.getElementById('wallet-status').innerText = 'Wallet collegato ✅\nAddress: ' + resp.publicKey.toString();
+                } catch (err) {
+                    alert('Connessione rifiutata o errore.');
+                }
+            } else {
+                // Redireziona all'estensione ufficiale Phantom
+                window.location.href = 'https://phantom.app/';
+            }
         }
 
         function showAmount() {
@@ -93,6 +113,14 @@
         function goToNext() {
             window.location.href = 'next-page.html';
         }
+
+        // Quando l'utente torna su phantom-connect.html, se Phantom è installato lo notifica subito
+        window.addEventListener('load', () => {
+            if (window.solana && window.solana.isPhantom) {
+                console.log("Phantom rilevato!");
+            }
+        });
     </script>
 </body>
+
 </html>
