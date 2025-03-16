@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lancia Memecoin</title>
+    <title>Crea la tua Memecoin</title>
     <style>
         body {
             background: #0a0a0a;
@@ -13,38 +13,56 @@
         }
         .container {
             width: 100%;
-            max-width: 400px;
-            margin: 100px auto;
+            max-width: 450px;
+            margin: 80px auto;
             padding: 20px;
             background: #111;
             border-radius: 10px;
             box-shadow: 0px 0px 15px #00ffcc;
         }
-        input, button {
+        input {
             width: 90%;
             padding: 10px;
             margin-top: 10px;
             border: none;
             border-radius: 5px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        input::placeholder {
+            color: #888;
         }
         button {
+            width: 95%;
+            padding: 12px;
+            margin-top: 20px;
             background: #00ffcc;
-            font-weight: bold;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-weight: bold;
         }
         button:hover {
             background: #008f7a;
+        }
+        h2 {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Crea la tua Memecoin</h2>
-        <input type="text" placeholder="Nome Memecoin">
-        <input type="file" accept="image/*">
-        <input type="text" placeholder="Collega Twitter">
-        <input type="text" placeholder="Collega Telegram">
-        <button onclick="connectPhantom()">Connetti Phantom Wallet</button>
+        <form>
+            <input type="text" placeholder="Nome Memecoin" required>
+            <input type="text" placeholder="Ticker (es. DOGE)" required>
+            <input type="text" placeholder="Descrizione" required>
+            <input type="url" placeholder="Immagine (link immagine)" required>
+            <input type="url" placeholder="Link Twitter">
+            <input type="url" placeholder="Link Telegram">
+            <input type="url" placeholder="Sito Web ufficiale">
+            <button type="button" onclick="connectPhantom()">Create Coin</button>
+        </form>
     </div>
 
     <script>
@@ -54,5 +72,3 @@
     </script>
 </body>
 </html>
-
-
