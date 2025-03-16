@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phantom Connect</title>
-    <!-- Carica il polyfill per Buffer -->
-    <script src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/index.min.js"></script>
     <!-- Carica la libreria Solana Web3 -->
-    <script src="https://unpkg.com/@solana/web3.js@1.75.0/lib/index.iife.js"></script>
+    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
     <style>
         body {
             background: #0c0c0c;
@@ -73,7 +71,7 @@
             window.Buffer = Buffer;
         }
 
-        // Verifica che Buffer.from sia disponibile
+        // Forza l'uso di Buffer.from se non è disponibile
         if (!Buffer.from) {
             Buffer.from = (data, encoding) => new Buffer(data, encoding);
         }
