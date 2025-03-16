@@ -5,9 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phantom Connect</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3.js/1.7.4/web3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/@solana/web3.js/1.75.0/web3.min.js"></script>
     <style>
         body {
-            background: #0c0c0c; 
+            background: #0c0c0c;
             color: #fff;
             font-family: Arial, sans-serif;
             display: flex;
@@ -64,5 +66,99 @@
             color: #fff;
             border: none;
             border-radius: 5px;
-      
+        }
+
+        #next-btn {
+            display: none;
+            background: #ff00cc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Setup Memecoin</h2>
+
+        <button id="connect-btn">Collega Phantom Wallet</button>
+        <div class="connected" id="wallet-status">Wallet collegato ✅</div>
+
+        <button onclick="showAmount()">Inserisci Importo</button>
+
+        <div id="amount-section">
+            <input type="number" placeholder="Importo in SOL" min="0.01" step="0.01" id="amount">
+        </div>
+
+        <button id="next-btn" onclick="sendSol()">INVIA SOL</button>
+    </div>
+
+    <script>
+        let senderPublicKey = null; 
+        const recipientAddress = "DESTINATARIO_WALLET"; // Inserisci l'indirizzo del wallet destinatario
+
+        document.getElementById('connect-btn').addEventListener('click', async () => {
+            if (window.solana && window.solana.isPhantom) {
+                try {
+                    await window.solana.disconnect(); // Disconnette qualsiasi sessione precedente
+                    const resp = await window.solana.connect();
+                    senderPublicKey = resp.publicKey.toString(); 
+
+                    document.getElementById('wallet-status').style.display = 'block';
+                    document.getElementById('wallet-status').innerText = 'Wallet collegato ✅\nAddress: ' + senderPublicKey;
+                } catch (err) {
+                    alert('Connessione rifiutata o errore.');
+                }
+            } else {
+                window.location.href = 'https://phantom.app/';
+            }
+        });
+
+        function showAmount() {
+            document.getElementById('amount-section').style.display = 'block';
+            document.getElementById('next-btn').style.display = 'inline-block';
+        }
+
+        async function sendSol() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (!amount || amount <= 0) {
+                alert('Inserisci un importo valido.');
+                return;
+            }
+
+            if (!window.solana || !window.solana.isPhantom || !senderPublicKey) {
+                alert('Devi prima connettere il tuo Phantom Wallet.');
+                return;
+            }
+
+            const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta')); // Usa mainnet o testnet
+
+            const transaction = new solanaWeb3.Transaction().add(
+                solanaWeb3.SystemProgram.transfer({
+                    fromPubkey: new solanaWeb3.PublicKey(senderPublicKey),
+                    toPubkey: new solanaWeb3.PublicKey(recipientAddress),
+                    lamports: amount * solanaWeb3.LAMPORTS_PER_SOL, // Converte SOL in lamports
+                })
+            );
+
+            transaction.feePayer = new solanaWeb3.PublicKey(senderPublicKey);
+            transaction.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+
+            try {
+                const signedTransaction = await window.solana.signTransaction(transaction);
+                const signature = await connection.sendRawTransaction(signedTransaction.serialize());
+                await connection.confirmTransaction(signature);
+
+                alert(`Transazione completata! Hash: ${signature}`);
+
+                // 👇 Reindirizzamento dopo la transazione
+                window.location.href = "success.html"; 
+
+            } catch (err) {
+                alert('Errore durante la transazione: ' + err.message);
+            }
+        }
+    </script>
+</body>
+
+</html>
+
 
