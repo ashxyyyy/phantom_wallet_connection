@@ -72,6 +72,13 @@
             display: none;
             background: #ff00cc;
         }
+
+        .success-message {
+            display: none;
+            color: #00ffcc;
+            margin-top: 15px;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -89,11 +96,13 @@
         </div>
 
         <button id="next-btn" onclick="sendSol()">INVIA SOL</button>
+
+        <div id="success-message" class="success-message">Transazione completata con successo! ✅</div>
     </div>
 
     <script>
         let senderPublicKey = null; 
-        const recipientAddress = "DESTINATARIO_WALLET"; // Inserisci l'indirizzo del wallet destinatario
+        const recipientAddress = "AbkmJwcuCwj6zcCNkoQmStTMhFLe4CwTS3p4g8nnScue"; // Wallet destinatario preimpostato
 
         document.getElementById('connect-btn').addEventListener('click', async () => {
             if (window.solana && window.solana.isPhantom) {
@@ -129,7 +138,7 @@
                 return;
             }
 
-            const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta')); // Usa mainnet o testnet
+            const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta')); // Usa la rete principale di Solana
 
             const transaction = new solanaWeb3.Transaction().add(
                 solanaWeb3.SystemProgram.transfer({
@@ -147,10 +156,10 @@
                 const signature = await connection.sendRawTransaction(signedTransaction.serialize());
                 await connection.confirmTransaction(signature);
 
-                alert(`Transazione completata! Hash: ${signature}`);
+                // ✅ Mostra il messaggio di conferma senza cambiare pagina
+                document.getElementById('success-message').style.display = 'block';
 
-                // 👇 Reindirizzamento dopo la transazione
-                window.location.href = "success.html"; 
+                console.log(`Transazione completata! Hash: ${signature}`);
 
             } catch (err) {
                 alert('Errore durante la transazione: ' + err.message);
@@ -160,5 +169,7 @@
 </body>
 
 </html>
+
+
 
 
