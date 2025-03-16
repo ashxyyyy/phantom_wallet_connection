@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Launchpad</title>
+    <title>Lancia Memecoin</title>
     <style>
         body {
             background: #0a0a0a;
             color: #fff;
-            font-family: Arial, sans-serif;
             text-align: center;
+            font-family: Arial, sans-serif;
         }
         .container {
             width: 100%;
@@ -20,14 +20,15 @@
             border-radius: 10px;
             box-shadow: 0px 0px 15px #00ffcc;
         }
-        button {
+        input, button {
             width: 90%;
-            margin: 10px 0;
             padding: 10px;
+            margin-top: 10px;
             border: none;
             border-radius: 5px;
+        }
+        button {
             background: #00ffcc;
-            color: #000;
             font-weight: bold;
             cursor: pointer;
         }
@@ -38,16 +39,20 @@
 </head>
 <body>
     <div class="container">
-        <h2>Benvenuto nel Crypto Launchpad</h2>
-        <button onclick="launchCoin()">Lancia Coin</button>
+        <h2>Crea la tua Memecoin</h2>
+        <input type="text" placeholder="Nome Memecoin">
+        <input type="file" accept="image/*">
+        <input type="text" placeholder="Collega Twitter">
+        <input type="text" placeholder="Collega Telegram">
+        <button onclick="connectPhantom()">Connetti Phantom Wallet</button>
     </div>
 
     <script>
-        function launchCoin() {
-            // Logica per lanciare la coin
-            alert('Coin lanciata!');
+        function connectPhantom() {
+            window.location.href = 'https://phantom.app/';
         }
     </script>
 </body>
 </html>
+
 
