@@ -20,27 +20,28 @@
             border-radius: 10px;
             box-shadow: 0px 0px 15px #00ffcc;
         }
-        input {
+        input, button {
             width: 90%;
             padding: 10px;
             margin-top: 10px;
             border: none;
             border-radius: 5px;
+        }
+        input[type="text"], input[type="url"] {
             background: #1a1a1a;
             color: #fff;
         }
         input::placeholder {
             color: #888;
         }
+        input[type="file"] {
+            background: #1a1a1a;
+            color: #fff;
+        }
         button {
-            width: 95%;
-            padding: 12px;
-            margin-top: 20px;
             background: #00ffcc;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
             font-weight: bold;
+            cursor: pointer;
         }
         button:hover {
             background: #008f7a;
@@ -57,18 +58,19 @@
             <input type="text" placeholder="Nome Memecoin" required>
             <input type="text" placeholder="Ticker (es. DOGE)" required>
             <input type="text" placeholder="Descrizione" required>
-            <input type="url" placeholder="Immagine (link immagine)" required>
+            <input type="file" accept="image/*" required>
             <input type="url" placeholder="Link Twitter">
             <input type="url" placeholder="Link Telegram">
             <input type="url" placeholder="Sito Web ufficiale">
-            <button type="button" onclick="connectPhantom()">Create Coin</button>
+            <button type="button" onclick="goToPhantomConnect()">Create Coin</button>
         </form>
     </div>
 
     <script>
-        function connectPhantom() {
-            window.location.href = 'https://phantom.app/';
+        function goToPhantomConnect() {
+            window.location.href = 'phantom-connect.html';
         }
     </script>
 </body>
 </html>
+
