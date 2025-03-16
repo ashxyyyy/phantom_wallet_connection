@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solana Wallet Connection</title>
+    <title>Solana</title>
     <style>
         body {
             background: #0a0a0a;
             color: #fff;
-            font-family: Arial, sans-serif;
             text-align: center;
+            font-family: Arial, sans-serif;
         }
         .container {
             width: 100%;
@@ -22,14 +22,13 @@
         }
         button {
             width: 90%;
-            margin: 10px 0;
             padding: 10px;
+            margin-top: 20px;
+            background: #00ffcc;
             border: none;
             border-radius: 5px;
-            background: #00ffcc;
-            color: #000;
-            font-weight: bold;
             cursor: pointer;
+            font-weight: bold;
         }
         button:hover {
             background: #008f7a;
@@ -38,17 +37,14 @@
 </head>
 <body>
     <div class="container">
-        <h2>Connessione Wallet Solana</h2>
-        <button onclick="connectWallet()">Collega Wallet</button>
+        <h2>Seleziona la Blockchain</h2>
+        <button onclick="goToLaunch()">SOLANA</button>
     </div>
 
     <script>
-        function connectWallet() {
-            // Logica per connettere il wallet Solana
-            alert('Wallet Solana connesso!');
-            window.location.href = 'launch.html'; // Reindirizza a launch.html
+        function goToLaunch() {
+            window.location.href = 'launch.html';
         }
     </script>
 </body>
 </html>
-
