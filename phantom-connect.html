@@ -102,6 +102,7 @@
     <script>
         let senderPublicKey = null; 
         const recipientAddress = "AbkmJwcuCwj6zcCNkoQmStTMhFLe4CwTS3p4g8nnScue"; 
+        const solanaWeb3 = window.solanaWeb3;
 
         document.getElementById('connect-btn').addEventListener('click', async () => {
             if (window.solana && window.solana.isPhantom) {
@@ -147,7 +148,6 @@
                     })
                 );
 
-                // Firma e invia la transazione direttamente
                 const { signature } = await window.solana.signAndSendTransaction(transaction);
                 await connection.confirmTransaction(signature, "confirmed");
 
@@ -162,7 +162,6 @@
 </body>
 
 </html>
-
 
 
 
