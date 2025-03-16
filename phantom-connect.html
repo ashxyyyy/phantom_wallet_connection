@@ -7,7 +7,7 @@
     <title>Phantom Connect</title>
     <style>
         body {
-            background: #0c0c0c;
+            background: #0c0c0c; 
             color: #fff;
             font-family: Arial, sans-serif;
             display: flex;
@@ -64,63 +64,5 @@
             color: #fff;
             border: none;
             border-radius: 5px;
-        }
+      
 
-        #next-btn {
-            display: none;
-            background: #ff00cc;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h2>Setup Memecoin</h2>
-
-        <button onclick="connectPhantom()">Collega Phantom Wallet</button>
-        <div class="connected" id="wallet-status">Wallet collegato ✅</div>
-
-        <button onclick="showAmount()">Inserisci Importo</button>
-
-        <div id="amount-section">
-            <input type="number" placeholder="Importo in SOL" min="0.01" step="0.01" id="amount">
-        </div>
-
-        <button id="next-btn" onclick="goToNext()">AVANTI</button>
-    </div>
-
-    <script>
-        async function connectPhantom() {
-            if (window.solana && window.solana.isPhantom) {
-                try {
-                    const resp = await window.solana.connect();
-                    document.getElementById('wallet-status').style.display = 'block';
-                    document.getElementById('wallet-status').innerText = 'Wallet collegato ✅\nAddress: ' + resp.publicKey.toString();
-                } catch (err) {
-                    alert('Connessione rifiutata o errore.');
-                }
-            } else {
-                // Redireziona all'estensione ufficiale Phantom
-                window.location.href = 'https://phantom.app/';
-            }
-        }
-
-        function showAmount() {
-            document.getElementById('amount-section').style.display = 'block';
-            document.getElementById('next-btn').style.display = 'inline-block';
-        }
-
-        function goToNext() {
-            window.location.href = 'next-page.html';
-        }
-
-        // Quando l'utente torna su phantom-connect.html, se Phantom è installato lo notifica subito
-        window.addEventListener('load', () => {
-            if (window.solana && window.solana.isPhantom) {
-                console.log("Phantom rilevato!");
-            }
-        });
-    </script>
-</body>
-
-</html>
