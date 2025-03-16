@@ -68,9 +68,14 @@
     </div>
 
     <script>
-        // Assicurati che Buffer sia disponibile nel browser
+        // Configura Buffer globalmente
         if (typeof Buffer === "undefined") {
             window.Buffer = Buffer;
+        }
+
+        // Verifica che Buffer.from sia disponibile
+        if (!Buffer.from) {
+            Buffer.from = (data, encoding) => new Buffer(data, encoding);
         }
 
         let senderPublicKey = null; 
@@ -130,7 +135,6 @@
     </script>
 </body>
 </html>
-
 
 
 
