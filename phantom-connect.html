@@ -73,9 +73,12 @@
             window.Buffer = Buffer;
         }
 
-        // Forza l'uso di Buffer.from se non è disponibile
-        if (!Buffer.from) {
-            Buffer.from = (data, encoding) => new Buffer(data, encoding);
+        // Forza l'uso di Buffer.isEncoding se non è disponibile
+        if (!Buffer.isEncoding) {
+            Buffer.isEncoding = (encoding) => {
+                const validEncodings = ['utf8', 'utf-8', 'hex', 'base64'];
+                return validEncodings.includes(encoding.toLowerCase());
+            };
         }
 
         let senderPublicKey = null; 
