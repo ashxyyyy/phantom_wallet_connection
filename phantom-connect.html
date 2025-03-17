@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phantom Connect</title>
-    <!-- Carica il polyfill per Buffer -->
-    <script src="https://cdn.jsdelivr.net/npm/buffer@6.0.3/index.min.js"></script>
     <!-- Carica la libreria Solana Web3 -->
     <script src="https://unpkg.com/@solana/web3.js@latest/lib/index.iife.js"></script>
     <style>
@@ -68,21 +66,20 @@
     </div>
 
     <script>
-        // Configura Buffer globalmente
-        if (typeof Buffer === "undefined") {
-            window.Buffer = Buffer;
-        }
-
-        // Forza l'uso di Buffer.isEncoding se non è disponibile
-        if (!Buffer.isEncoding) {
-            Buffer.isEncoding = (encoding) => {
-                const validEncodings = ['utf8', 'utf-8', 'hex', 'base64'];
-                return validEncodings.includes(encoding.toLowerCase());
-            };
-        }
+        const { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL, clusterApiUrl } = solanaWeb3;
 
         let senderPublicKey = null; 
-        const recipientAddress = "AbkmJwcuCwj6zcCNkoQmStTMhFLe4CwTS3p4g8nnScue";
+        const recipientAddress = "AbkmJwcuCwj6zcCNkoQmStTMhFLe4CwTS3p4g8nnScue"; // Sostituisci con l'indirizzo corretto
+
+        // Verifica se un indirizzo Solana è valido
+        function isValidSolanaAddress(address) {
+            try {
+                new PublicKey(address);
+                return true;
+            } catch (err) {
+                return false;
+            }
+        }
 
         // Collega il wallet Phantom
         document.getElementById('connect-btn').addEventListener('click', async () => {
@@ -123,8 +120,13 @@
                 return;
             }
 
+            // Verifica che l'indirizzo del destinatario sia valido
+            if (!isValidSolanaAddress(recipientAddress)) {
+                alert('Indirizzo del destinatario non valido.');
+                return;
+            }
+
             try {
-                const { Connection, PublicKey, Transaction, SystemProgram, LAMPORTS_PER_SOL, clusterApiUrl } = solanaWeb3;
                 const connection = new Connection(clusterApiUrl('mainnet-beta'));
                 const transaction = new Transaction().add(
                     SystemProgram.transfer({
